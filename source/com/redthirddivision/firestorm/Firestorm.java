@@ -23,6 +23,8 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import com.redthirddivision.firestorm.rendering.Texture;
+
 /**
  * <strong>Project:</strong> Firestorm <br>
  * <strong>File:</strong> Firestorm.java
@@ -36,6 +38,14 @@ public class Firestorm extends Canvas implements Runnable {
     public static final int    HEIGHT = WIDTH / 4 * 3;
 
     private boolean            running;
+    private Texture texture, t2, t3, t4;
+    
+    public Firestorm(){
+        texture = new Texture("test");
+        t2 = new Texture("test");
+        t3 = new Texture("test");
+        t4 = new Texture("test");
+    }
 
     private void tick() {}
 
@@ -51,7 +61,10 @@ public class Firestorm extends Canvas implements Runnable {
 
         g.setColor(Color.RED);
         g.fillRect(0, 0, WIDTH, HEIGHT);
-
+        texture.render(g, 100, 100);
+        t2.render(g, 100, 150);
+        t3.render(g, 150, 100);
+        t4.render(g, 200, 200);
         ////////////////////////////////////////////////
         g.dispose();
         bs.show();
