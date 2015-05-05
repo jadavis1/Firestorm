@@ -12,9 +12,10 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-package com.redthirddivision.firestorm.rendering;
+package com.redthirddivision.firestorm.rendering.textures;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,18 +34,17 @@ import com.redthirddivision.firestorm.utils.managers.TextureManager;
 public class Texture {
 
     private final static Map<String, TextureManager> texMap = new HashMap<String, TextureManager>();
-    private TextureManager manager;
-    private String fileName;
-    
-    
-    public Texture(String fileName){
+    private TextureManager                           manager;
+    private String                                   fileName;
+
+    public Texture(String fileName) {
         this.fileName = fileName;
         TextureManager oldTexture = texMap.get(fileName);
-        if(oldTexture != null){
+        if (oldTexture != null) {
             manager = oldTexture;
             manager.addReference();
         }
-        else{
+        else {
             try {
                 System.out.println("Loading texture: " + fileName);
                 manager = new TextureManager(ImageIO.read(new File("./resources/textures/" + fileName + ".png")));
@@ -54,18 +54,20 @@ public class Texture {
             }
         }
     }
-    
+
     @Override
     protected void finalize() throws Throwable {
-        if(manager.removeReference() && !fileName.isEmpty()){
+        if (manager.removeReference() && !fileName.isEmpty())
             texMap.remove(fileName);
-            System.out.println("removing texture from memory: " + fileName);
-        }
         super.finalize();
     }
-    
+
     public void render(Graphics g, double x, double y) {
         g.drawImage(manager.getImage(), (int) x, (int) y, null);
+    }
+    
+    public BufferedImage getImage(){
+        return manager.getImage();
     }
 
 }
