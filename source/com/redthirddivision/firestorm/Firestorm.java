@@ -17,12 +17,14 @@ package com.redthirddivision.firestorm;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import com.redthirddivision.firestorm.input.KeyInput;
 import com.redthirddivision.firestorm.rendering.textures.Sprite;
 import com.redthirddivision.firestorm.rendering.textures.SpriteSheet;
 import com.redthirddivision.firestorm.rendering.textures.Texture;
@@ -43,6 +45,7 @@ public class Firestorm extends Canvas implements Runnable {
     private Texture            texture, t2, t3, t4;
     private SpriteSheet        sheet;
     private Sprite             sprite, s2;
+    private double             sX     = 350, sY = 300;
 
     public Firestorm() {
         texture = new Texture("test");
@@ -52,9 +55,17 @@ public class Firestorm extends Canvas implements Runnable {
         sheet = new SpriteSheet(new Texture("test_sheet"), 64);
         sprite = new Sprite(sheet, 3, 1);
         s2 = new Sprite(sheet, 1, 2);
+        addKeyListener(new KeyInput());
     }
 
-    private void tick() {}
+    private void tick() {
+        if (KeyInput.isDown(KeyEvent.VK_SPACE))
+            sY -= 2;
+        if (KeyInput.wasPressed(KeyEvent.VK_ENTER)) {
+            sY = 300;
+            System.out.println("Enter was pressed");
+        }
+    }
 
     private void render() {
         BufferStrategy bs = getBufferStrategy();
@@ -72,9 +83,9 @@ public class Firestorm extends Canvas implements Runnable {
         t2.render(g, 100, 150);
         t3.render(g, 150, 100);
         t4.render(g, 200, 200);
-        sprite.render(g, 350, 300);
-        s2.render(g, 0,  0);
-        
+        sprite.render(g, sX, sY);
+        s2.render(g, 0, 0);
+
         ////////////////////////////////////////////////
         g.dispose();
         bs.show();
@@ -93,6 +104,7 @@ public class Firestorm extends Canvas implements Runnable {
 
     @Override
     public void run() {
+        requestFocus();
         double target = 60.0;
         double nsPerTick = 1000000000.0 / target;
         long lastTime = System.nanoTime();
@@ -109,6 +121,7 @@ public class Firestorm extends Canvas implements Runnable {
 
             if (unprocessed >= 1.0) {
                 tick();
+                KeyInput.update();
                 unprocessed--;
                 tps++;
                 canRender = true;
@@ -154,7 +167,6 @@ public class Firestorm extends Canvas implements Runnable {
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.requestFocus();
         game.start();
     }
 
