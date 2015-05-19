@@ -18,6 +18,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
@@ -25,6 +26,7 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 import com.redthirddivision.firestorm.input.KeyInput;
+import com.redthirddivision.firestorm.input.MouseInput;
 import com.redthirddivision.firestorm.rendering.textures.Sprite;
 import com.redthirddivision.firestorm.rendering.textures.SpriteSheet;
 import com.redthirddivision.firestorm.rendering.textures.Texture;
@@ -56,6 +58,12 @@ public class Firestorm extends Canvas implements Runnable {
         sprite = new Sprite(sheet, 3, 1);
         s2 = new Sprite(sheet, 1, 2);
         addKeyListener(new KeyInput());
+        MouseInput mi = new MouseInput();
+        addMouseListener(mi);
+        addMouseMotionListener(mi);
+        System.out.println("Button 1: " + MouseEvent.BUTTON1);
+        System.out.println("Button 2: " + MouseEvent.BUTTON2);
+        System.out.println("Button 3: " + MouseEvent.BUTTON3);
     }
 
     private void tick() {
@@ -68,6 +76,13 @@ public class Firestorm extends Canvas implements Runnable {
         
         if(KeyInput.wasReleased(KeyEvent.VK_G))
             System.out.println("G was released");
+        
+        if(MouseInput.isDown(MouseEvent.BUTTON1))
+            System.out.println("Left is pressed");
+        if(MouseInput.wasPressed(MouseEvent.BUTTON2))
+            System.out.println("middle was pressed");
+        if(MouseInput.wasReleased(MouseEvent.BUTTON3))
+            System.out.println("right was released");
     }
 
     private void render() {
@@ -125,6 +140,7 @@ public class Firestorm extends Canvas implements Runnable {
             if (unprocessed >= 1.0) {
                 tick();
                 KeyInput.update();
+                MouseInput.update();
                 unprocessed--;
                 tps++;
                 canRender = true;
