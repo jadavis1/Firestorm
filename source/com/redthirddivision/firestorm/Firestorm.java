@@ -65,6 +65,9 @@ public class Firestorm extends Canvas implements Runnable {
             sY = 300;
             System.out.println("Enter was pressed");
         }
+        
+        if(KeyInput.wasReleased(KeyEvent.VK_G))
+            System.out.println("G was released");
     }
 
     private void render() {
