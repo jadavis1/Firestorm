@@ -17,7 +17,6 @@ package com.redthirddivision.firestorm;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -66,24 +65,7 @@ public class Firestorm extends Canvas implements Runnable {
         System.out.println("Button 3: " + MouseEvent.BUTTON3);
     }
 
-    private void tick() {
-        if (KeyInput.isDown(KeyEvent.VK_SPACE))
-            sY -= 2;
-        if (KeyInput.wasPressed(KeyEvent.VK_ENTER)) {
-            sY = 300;
-            System.out.println("Enter was pressed");
-        }
-        
-        if(KeyInput.wasReleased(KeyEvent.VK_G))
-            System.out.println("G was released");
-        
-        if(MouseInput.isDown(MouseEvent.BUTTON1))
-            System.out.println("Left is pressed");
-        if(MouseInput.wasPressed(MouseEvent.BUTTON2))
-            System.out.println("middle was pressed");
-        if(MouseInput.wasReleased(MouseEvent.BUTTON3))
-            System.out.println("right was released");
-    }
+    private void tick() {}
 
     private void render() {
         BufferStrategy bs = getBufferStrategy();
