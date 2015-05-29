@@ -39,8 +39,10 @@ public class Firestorm extends Canvas implements Runnable {
     public static final int    HEIGHT = WIDTH / 4 * 3;
 
     private boolean            running;
+
+    private Menu               menu;
     
-    private Menu menu;
+    public static Firestorm INSTANCE;
 
     public Firestorm() {
         addKeyListener(new KeyInput());
@@ -48,9 +50,13 @@ public class Firestorm extends Canvas implements Runnable {
         addMouseListener(mi);
         addMouseMotionListener(mi);
         menu = new Menu();
+        
+        INSTANCE = this;
     }
 
-    private void tick() {}
+    private void tick() {
+        menu.tick();
+    }
 
     private void render() {
         BufferStrategy bs = getBufferStrategy();
@@ -77,7 +83,7 @@ public class Firestorm extends Canvas implements Runnable {
         new Thread(this, "FirestormMain-Thread").start();
     }
 
-    private void stop() {
+    public void stop() {
         if (!running) return;
         running = false;
     }
