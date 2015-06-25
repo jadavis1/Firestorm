@@ -25,6 +25,8 @@ import javax.swing.JFrame;
 
 import com.redthirddivision.firestorm.input.KeyInput;
 import com.redthirddivision.firestorm.input.MouseInput;
+import com.redthirddivision.firestorm.states.MenuState;
+import com.redthirddivision.firestorm.states.StateManager;
 
 /**
  * <strong>Project:</strong> Firestorm <br>
@@ -40,22 +42,24 @@ public class Firestorm extends Canvas implements Runnable {
 
     private boolean            running;
 
-    private Menu               menu;
-    
-    public static Firestorm INSTANCE;
+    private StateManager       stateManager;
+
+    public static Firestorm    INSTANCE;
 
     public Firestorm() {
         addKeyListener(new KeyInput());
         MouseInput mi = new MouseInput();
         addMouseListener(mi);
         addMouseMotionListener(mi);
-        menu = new Menu();
-        
+        stateManager = new StateManager();
+
+        stateManager.addState(new MenuState());
+
         INSTANCE = this;
     }
 
     private void tick() {
-        menu.tick();
+        stateManager.tick();
     }
 
     private void render() {
@@ -70,7 +74,8 @@ public class Firestorm extends Canvas implements Runnable {
 
         g.setColor(Color.RED);
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        menu.render(g);
+
+        stateManager.render(g);
 
         ////////////////////////////////////////////////
         g.dispose();

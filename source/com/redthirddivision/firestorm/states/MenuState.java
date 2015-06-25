@@ -12,7 +12,7 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-package com.redthirddivision.firestorm;
+package com.redthirddivision.firestorm.states;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 
 import com.sun.glass.events.KeyEvent;
 
+import com.redthirddivision.firestorm.Firestorm;
 import com.redthirddivision.firestorm.input.KeyInput;
 import com.redthirddivision.firestorm.input.MouseInput;
 import com.redthirddivision.firestorm.rendering.ui.Button;
@@ -29,16 +30,17 @@ import com.redthirddivision.firestorm.utils.Fonts;
 
 /**
  * <strong>Project:</strong> Firestorm <br>
- * <strong>File:</strong> Menu.java
+ * <strong>File:</strong> MenuState.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>
  */
-public class Menu {
+public class MenuState implements State {
 
-    private final Button[] options;
-    private int            currentSelection;
+    private Button[] options;
+    private int      currentSelection;
 
-    public Menu() {
+    @Override
+    public void init() {
         options = new Button[3];
         options[0] = new Button("Play", 200 + 0 * 80,
                 new Font("Arial", Font.PLAIN, 32), new Font("Arial", Font.BOLD, 48),
@@ -51,18 +53,22 @@ public class Menu {
                 Color.WHITE, Color.YELLOW);
     }
 
-    public void tick() {
+    @Override
+    public void enter() {}
 
-        if(KeyInput.wasPressed(KeyEvent.VK_UP) || KeyInput.wasPressed(KeyEvent.VK_W)){
+    @Override
+    public void tick(StateManager stateManager) {
+
+        if (KeyInput.wasPressed(KeyEvent.VK_UP) || KeyInput.wasPressed(KeyEvent.VK_W)) {
             currentSelection--;
-            if(currentSelection < 0) currentSelection = options.length - 1;
+            if (currentSelection < 0) currentSelection = options.length - 1;
         }
-        
-        if(KeyInput.wasPressed(KeyEvent.VK_DOWN) || KeyInput.wasPressed(KeyEvent.VK_S)){
+
+        if (KeyInput.wasPressed(KeyEvent.VK_DOWN) || KeyInput.wasPressed(KeyEvent.VK_S)) {
             currentSelection++;
-            if(currentSelection >= options.length) currentSelection = 0;
+            if (currentSelection >= options.length) currentSelection = 0;
         }
-        
+
         boolean clicked = false;
         for (int i = 0; i < options.length; i++) {
             if (options[i].intersects(new Rectangle(MouseInput.getX(), MouseInput.getY(), 1, 1))) {
@@ -70,15 +76,15 @@ public class Menu {
                 clicked = MouseInput.wasPressed(MouseEvent.BUTTON1);
             }
         }
-        
+
         if (clicked || KeyInput.wasPressed(KeyEvent.VK_ENTER))
-            select();
+            select(stateManager);
     }
 
-    private void select() {
+    private void select(StateManager stateManager) {
         switch (currentSelection) {
             case 0:
-                System.out.println("Play");
+                stateManager.setState("level1");
                 break;
             case 1:
                 System.out.println("Options");
@@ -101,6 +107,14 @@ public class Menu {
 
             options[i].render(g);
         }
+    }
+
+    @Override
+    public void exit() {}
+
+    @Override
+    public String getName() {
+        return "menu";
     }
 
 }
