@@ -25,6 +25,7 @@ import javax.swing.JFrame;
 
 import com.redthirddivision.firestorm.input.KeyInput;
 import com.redthirddivision.firestorm.input.MouseInput;
+import com.redthirddivision.firestorm.states.GameState;
 import com.redthirddivision.firestorm.states.MenuState;
 import com.redthirddivision.firestorm.states.StateManager;
 
@@ -54,6 +55,7 @@ public class Firestorm extends Canvas implements Runnable {
         stateManager = new StateManager();
 
         stateManager.addState(new MenuState());
+        stateManager.addState(new GameState());
 
         INSTANCE = this;
     }

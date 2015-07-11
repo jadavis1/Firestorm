@@ -12,33 +12,33 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-package com.redthirddivision.firestorm.rendering.textures;
+package com.redthirddivision.firestorm.entities;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import com.redthirddivision.firestorm.rendering.textures.Sprite;
+import com.redthirddivision.firestorm.states.GameState;
 
 /**
  * <strong>Project:</strong> Firestorm <br>
- * <strong>File:</strong> Sprite.java
+ * <strong>File:</strong> Mob.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>
  */
-public class Sprite {
+public abstract class Mob extends Entity {
 
-    private BufferedImage image;
+    protected double dx, dy;
 
-    public Sprite(SpriteSheet spritesheet, int x, int y) {
-        this.image = spritesheet.getTexture().getImage().getSubimage((x * spritesheet.getWidth()) - spritesheet.getWidth(),
-                (y * spritesheet.getHeight()) - spritesheet.getHeight(), spritesheet.getWidth(), spritesheet.getHeight());
-    }
-    
-    public Sprite(String texName){
-        Texture tex = new Texture(texName);
-        image = tex.getImage();
+    public Mob(Sprite sprite, double x, double y, GameState state) {
+        super(sprite, x, y, state);
     }
 
-    public void render(Graphics g, double x, double y) {
-        g.drawImage(image, (int) x, (int) y, null);
+    @Override
+    public void tick() {
+        move();
+    }
+
+    public void move() {
+        x += dx;
+        y += dy;
     }
 
 }
