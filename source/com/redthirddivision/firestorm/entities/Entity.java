@@ -20,7 +20,7 @@ import com.redthirddivision.firestorm.rendering.textures.Sprite;
 import com.redthirddivision.firestorm.states.GameState;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> Entity.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>

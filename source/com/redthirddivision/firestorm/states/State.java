@@ -17,7 +17,7 @@ package com.redthirddivision.firestorm.states;
 import java.awt.Graphics;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> State.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>

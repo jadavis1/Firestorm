@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> StateManager.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>

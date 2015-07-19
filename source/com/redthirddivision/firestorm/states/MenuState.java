@@ -22,14 +22,14 @@ import java.awt.event.MouseEvent;
 
 import com.sun.glass.events.KeyEvent;
 
-import com.redthirddivision.firestorm.Firestorm;
+import com.redthirddivision.firestorm.Game;
 import com.redthirddivision.firestorm.input.KeyInput;
 import com.redthirddivision.firestorm.input.MouseInput;
 import com.redthirddivision.firestorm.rendering.ui.Button;
 import com.redthirddivision.firestorm.utils.Fonts;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> MenuState.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>
@@ -91,15 +91,15 @@ public class MenuState implements State {
                 break;
             case 2:
                 System.out.println("Exit");
-                Firestorm.INSTANCE.stop();
+                Game.INSTANCE.stop();
                 break;
         }
     }
 
     public void render(Graphics g) {
         g.setColor(Color.BLACK);
-        g.fillRect(0, 0, Firestorm.WIDTH, Firestorm.HEIGHT);
-        Fonts.drawString(g, new Font("Arial", Font.BOLD, 72), Color.ORANGE, Firestorm.TITLE, 80);
+        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+        Fonts.drawString(g, new Font("Arial", Font.BOLD, 72), Color.ORANGE, Game.TITLE, 80);
 
         for (int i = 0; i < options.length; i++) {
             if (i == currentSelection) options[i].setSelected(true);

@@ -18,7 +18,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> KeyInput.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>

@@ -19,10 +19,10 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 
-import com.redthirddivision.firestorm.Firestorm;
+import com.redthirddivision.firestorm.Game;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> Fonts.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>
@@ -37,20 +37,20 @@ public class Fonts {
 
     public static void drawString(Graphics g, Font f, Color c, String text) {
         FontMetrics fm = g.getFontMetrics(f);
-        int x = (Firestorm.WIDTH - fm.stringWidth(text)) / 2; // Horizontal center
-        int y = ((Firestorm.HEIGHT - fm.getHeight()) / 2) + fm.getAscent(); // Vertical center
+        int x = (Game.WIDTH - fm.stringWidth(text)) / 2; // Horizontal center
+        int y = ((Game.HEIGHT - fm.getHeight()) / 2) + fm.getAscent(); // Vertical center
         drawString(g, f, c, text, x, y);
     }
 
     public static void drawString(Graphics g, Font f, Color c, String text, double x) {
         FontMetrics fm = g.getFontMetrics(f);
-        int y = ((Firestorm.HEIGHT - fm.getHeight()) / 2) + fm.getAscent(); // Vertical center
+        int y = ((Game.HEIGHT - fm.getHeight()) / 2) + fm.getAscent(); // Vertical center
         drawString(g, f, c, text, (int) x, y);
     }
 
     public static void drawString(Graphics g, Font f, Color c, String text, int y) {
         FontMetrics fm = g.getFontMetrics(f);
-        int x = (Firestorm.WIDTH - fm.stringWidth(text)) / 2; // Horizontal center
+        int x = (Game.WIDTH - fm.stringWidth(text)) / 2; // Horizontal center
         drawString(g, f, c, text, x, y);
     }
     

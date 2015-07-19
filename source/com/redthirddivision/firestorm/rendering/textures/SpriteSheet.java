@@ -15,7 +15,7 @@
 package com.redthirddivision.firestorm.rendering.textures;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> SpriteSheet.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>

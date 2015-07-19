@@ -26,7 +26,7 @@ import javax.imageio.ImageIO;
 import com.redthirddivision.firestorm.utils.managers.TextureManager;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> Texture.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>

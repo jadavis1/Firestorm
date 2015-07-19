@@ -18,7 +18,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> Sprite.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>

@@ -20,11 +20,11 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import com.redthirddivision.firestorm.Firestorm;
+import com.redthirddivision.firestorm.Game;
 import com.redthirddivision.firestorm.utils.Fonts;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> Button.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>
@@ -58,7 +58,7 @@ public class Button extends Rectangle {
             Fonts.drawString(g, font, color, text, textY);
         
         FontMetrics fm = g.getFontMetrics();
-        this.x = (Firestorm.WIDTH - fm.stringWidth(text)) / 2;
+        this.x = (Game.WIDTH - fm.stringWidth(text)) / 2;
         this.y = textY - fm.getHeight();
         this.width = fm.stringWidth(text);
         this.height = fm.getHeight();

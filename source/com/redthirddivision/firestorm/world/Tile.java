@@ -12,25 +12,34 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-package com.redthirddivision.firestorm.utils.managers;
+package com.redthirddivision.firestorm.world;
+
+
+import java.awt.Graphics;
+
+import com.redthirddivision.firestorm.rendering.textures.Sprite;
 
 /**
  * <strong>Project:</strong> Game <br>
- * <strong>File:</strong> ResourceManager.java
+ * <strong>File:</strong> Tile.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>
  */
-public abstract class ResourceManager {
-    
-    protected int count = 1;
-    
-    public void addReference(){
-        count++;
+public class Tile {
+
+    protected float   x, y;
+    protected Sprite  sprite;
+    protected boolean solid;
+
+    public Tile(float x, float y, Sprite sprite) {
+        this.x = x;
+        this.y = y;
+        this.sprite = sprite;
+        this.solid = true;
     }
-    
-    public boolean removeReference(){
-        count--;
-        return count == 0;
+
+    public void render(Graphics g) {
+        sprite.render(g, x, y);
     }
 
 }

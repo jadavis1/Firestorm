@@ -18,7 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * <strong>Project:</strong> Firestorm <br>
+ * <strong>Project:</strong> Game <br>
  * <strong>File:</strong> MouseInput.java
  *
  * @author <a href = "http://redthirddivision.com/team/blp"> Matthew Rogers</a>
