@@ -17,11 +17,8 @@ package com.redthirddivision.firestorm;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-
-import javax.swing.JFrame;
 
 import com.redthirddivision.firestorm.input.KeyInput;
 import com.redthirddivision.firestorm.input.MouseInput;
@@ -72,12 +69,14 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.translate(-6, -28);
         ////////////////////////////////////////////////
 
-        g.setColor(Color.RED);
-        g.fillRect(0, 0, WIDTH, HEIGHT);
+        g2d.setColor(Color.RED);
+        g2d.fillRect(0, 0, WIDTH, HEIGHT);
 
-        stateManager.render(g);
+        stateManager.render(g2d);
 
         ////////////////////////////////////////////////
         g.dispose();

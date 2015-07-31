@@ -16,6 +16,7 @@ package com.redthirddivision.firestorm.entities;
 
 import com.redthirddivision.firestorm.rendering.textures.Sprite;
 import com.redthirddivision.firestorm.states.GameState;
+import com.redthirddivision.firestorm.world.Tile;
 
 /**
  * <strong>Project:</strong> Game <br>
@@ -37,8 +38,40 @@ public abstract class Mob extends Entity {
     }
 
     public void move() {
-        x += dx;
-        y += dy;
+        if (!hasHorizontalCollision()) x += dx;
+        if (!hasVerticalCollision()) y += dy;
+    }
+
+    protected boolean hasVerticalCollision() {
+        for (int i = 0; i < state.getTiles().size(); i++) {
+            Tile t = state.getTiles().get(i);
+            if (getBounds().intersects(t.getTop()) && dy > 0) {
+                dy = 0;
+                return true;
+            }
+            if (getBounds().intersects(t.getBottom()) && dy < 0) {
+                dy = 0;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected boolean hasHorizontalCollision() {
+        for (int i = 0; i < state.getTiles().size(); i++) {
+            Tile t = state.getTiles().get(i);
+            if (getBounds().intersects(t.getRight()) && dx < 0) {
+                dx = 0;
+                return true;
+            }
+            if (getBounds().intersects(t.getLeft()) && dx > 0) {
+                dx = 0;
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

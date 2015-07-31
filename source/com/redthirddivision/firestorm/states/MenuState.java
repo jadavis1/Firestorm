@@ -16,7 +16,7 @@ package com.redthirddivision.firestorm.states;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
@@ -96,7 +96,7 @@ public class MenuState implements State {
         }
     }
 
-    public void render(Graphics g) {
+    public void render(Graphics2D g) {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
         Fonts.drawString(g, new Font("Arial", Font.BOLD, 72), Color.ORANGE, Game.TITLE, 80);
