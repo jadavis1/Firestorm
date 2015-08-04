@@ -40,7 +40,7 @@ public class GameState implements State {
     public void init() {
         entities = new ArrayList<Entity>();
         tiles = new ArrayList<Tile>();
-        new Player(new Sprite("test"), 100, 100, this);
+        new Player(new Sprite("test1"), 100, 100, this);
         float x = 0;
         float y = Game.HEIGHT - 64;
         tiles.add(new Tile(200, 200, new Sprite(new SpriteSheet(new Texture("terrain"), 64), 1, 1)));
