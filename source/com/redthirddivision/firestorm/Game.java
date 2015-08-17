@@ -34,15 +34,16 @@ import com.redthirddivision.firestorm.states.StateManager;
  */
 public class Game extends Canvas implements Runnable {
 
-    public static final String TITLE  = "Game";
-    public static final int    WIDTH  = 640;
-    public static final int    HEIGHT = WIDTH / 4 * 3;
+    public static final String  TITLE  = "Game";
+    public static final int     WIDTH  = 640;
+    public static final int     HEIGHT = WIDTH / 4 * 3;
+    public static final boolean DEBUG  = false;
 
-    private boolean            running;
+    private boolean             running;
 
-    private StateManager       stateManager;
+    private StateManager        stateManager;
 
-    public static Game    INSTANCE;
+    public static Game          INSTANCE;
 
     public Game() {
         addKeyListener(new KeyInput());
@@ -73,7 +74,7 @@ public class Game extends Canvas implements Runnable {
         g2d.translate(-6, -28);
         ////////////////////////////////////////////////
 
-        g2d.setColor(Color.RED);
+        g2d.setColor(Color.BLACK);
         g2d.fillRect(0, 0, WIDTH, HEIGHT);
 
         stateManager.render(g2d);
@@ -81,6 +82,7 @@ public class Game extends Canvas implements Runnable {
         ////////////////////////////////////////////////
         g.dispose();
         bs.show();
+        //Code Snippet: std::cout << "Snippet yo";
     }
 
     protected void start() {

@@ -18,6 +18,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import com.redthirddivision.firestorm.Game;
 import com.redthirddivision.firestorm.rendering.textures.Sprite;
 import com.redthirddivision.firestorm.states.GameState;
 
@@ -29,10 +30,10 @@ import com.redthirddivision.firestorm.states.GameState;
  */
 public abstract class Entity {
 
-    protected double x, y;
-    protected Sprite sprite;
+    protected double    x, y;
+    protected Sprite    sprite;
     protected GameState state;
-    
+
     public Entity(Sprite sprite, double x, double y, GameState state) {
         this.sprite = sprite;
         this.x = x;
@@ -40,21 +41,23 @@ public abstract class Entity {
         this.state = state;
         state.addEntity(this);
     }
-   
+
     public abstract void tick();
-    
-    public void render(Graphics2D g){
+
+    public void render(Graphics2D g) {
         sprite.render(g, x, y);
-        g.setColor(Color.RED);
-        g.draw(getTop());
-        g.setColor(Color.BLUE);
-        g.draw(getBottom());
-        g.setColor(Color.MAGENTA);
-        g.draw(getLeft());
-        g.setColor(Color.ORANGE);
-        g.draw(getRight());
+        if (Game.DEBUG) {
+            g.setColor(Color.RED);
+            g.draw(getTop());
+            g.setColor(Color.BLUE);
+            g.draw(getBottom());
+            g.setColor(Color.MAGENTA);
+            g.draw(getLeft());
+            g.setColor(Color.ORANGE);
+            g.draw(getRight());
+        }
     }
-    
+
     public Rectangle getBounds() {
         return new Rectangle((int) x, (int) y, sprite.getWidth(),
                 sprite.getHeight());
@@ -66,7 +69,7 @@ public abstract class Entity {
     }
 
     public Rectangle getBottom() {
-        return new Rectangle((int) x + 6, (int)y + sprite.getHeight() - 4,
+        return new Rectangle((int) x + 6, (int) y + sprite.getHeight() - 4,
                 sprite.getWidth() - 6,
                 4);
     }
@@ -80,5 +83,5 @@ public abstract class Entity {
         return new Rectangle((int) x, (int) y + 6, 4,
                 sprite.getHeight() - 6);
     }
-    
+
 }

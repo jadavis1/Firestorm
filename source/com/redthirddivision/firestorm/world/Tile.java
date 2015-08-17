@@ -18,6 +18,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import com.redthirddivision.firestorm.Game;
 import com.redthirddivision.firestorm.rendering.textures.Sprite;
 
 /**
@@ -41,14 +42,16 @@ public class Tile {
 
     public void render(Graphics2D g) {
         sprite.render(g, x, y);
-        g.setColor(Color.RED);
-        g.draw(getTop());
-        g.setColor(Color.BLUE);
-        g.draw(getBottom());
-        g.setColor(Color.MAGENTA);
-        g.draw(getLeft());
-        g.setColor(Color.ORANGE);
-        g.draw(getRight());
+        if (Game.DEBUG) {
+            g.setColor(Color.RED);
+            g.draw(getTop());
+            g.setColor(Color.BLUE);
+            g.draw(getBottom());
+            g.setColor(Color.MAGENTA);
+            g.draw(getLeft());
+            g.setColor(Color.ORANGE);
+            g.draw(getRight());
+        }
     }
 
     public Rectangle getBounds() {
@@ -62,7 +65,7 @@ public class Tile {
     }
 
     public Rectangle getBottom() {
-        return new Rectangle((int) x + 6, (int)y + sprite.getHeight() - 4,
+        return new Rectangle((int) x + 6, (int) y + sprite.getHeight() - 4,
                 sprite.getWidth() - 6,
                 4);
     }
