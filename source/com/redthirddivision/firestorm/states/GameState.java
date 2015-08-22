@@ -17,13 +17,9 @@ package com.redthirddivision.firestorm.states;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import com.redthirddivision.firestorm.Game;
 import com.redthirddivision.firestorm.entities.Entity;
-import com.redthirddivision.firestorm.entities.Player;
-import com.redthirddivision.firestorm.rendering.textures.Sprite;
-import com.redthirddivision.firestorm.rendering.textures.SpriteSheet;
-import com.redthirddivision.firestorm.rendering.textures.Texture;
 import com.redthirddivision.firestorm.world.Tile;
+import com.redthirddivision.firestorm.world.World;
 
 /**
  * <strong>Project:</strong> Game <br>
@@ -35,23 +31,14 @@ public class GameState implements State {
 
     private ArrayList<Entity> entities;
     private ArrayList<Tile>   tiles;
+    private World world;
 
     @Override
     public void init() {
         entities = new ArrayList<Entity>();
         tiles = new ArrayList<Tile>();
-        new Player(new Sprite("player"), 100, 100, this);
-        float x = 0;
-        float y = Game.HEIGHT - 64;
-        tiles.add(new Tile(200, 200, new Sprite(new SpriteSheet(new Texture("terrain"), 32), 1, 1)));
-        tiles.add(new Tile(100, 480 - 64 - 64, new Sprite(new SpriteSheet(new Texture("terrain"), 32), 1, 1)));
-        tiles.add(new Tile(400, 50, new Sprite(new SpriteSheet(new Texture("terrain"), 32), 1, 1)));
-        tiles.add(new Tile(300, 300, new Sprite(new SpriteSheet(new Texture("terrain"), 32), 1, 1)));
-        tiles.add(new Tile(640 - 64, 300, new Sprite(new SpriteSheet(new Texture("terrain"), 32), 1, 1)));
-        for(int i = 0; i < 10; i++){
-            tiles.add(new Tile(x, y, new Sprite(new SpriteSheet(new Texture("terrain"), 32), 1, 1)));
-            x+=32;
-        }
+//        new Player(new Sprite("player"), 100, 100, this);
+        world = new World("level1", this);
     }
 
     @Override
@@ -83,6 +70,10 @@ public class GameState implements State {
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+    }
+    
+    public void addTile(Tile tile){
+        tiles.add(tile);
     }
     
     public ArrayList<Tile> getTiles() {
