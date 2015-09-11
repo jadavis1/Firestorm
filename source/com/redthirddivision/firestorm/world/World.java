@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.redthirddivision.firestorm.entities.Player;
-import com.redthirddivision.firestorm.rendering.textures.Sprite;
+import com.redthirddivision.firestorm.rendering.textures.Texture;
 import com.redthirddivision.firestorm.states.GameState;
 
 /**
@@ -52,7 +52,7 @@ public class World {
             for(int x = 0; x < width; x++){
                 int id = pixels[x + y * width];
                 if(id == 0xFF0000FF)
-                    new Player(new Sprite("player"), x * 32, y * 32, state);
+                    new Player(new Texture("player"), x * 32, y * 32, state);
                 else if(Tile.getFromID(id) != null)
                     state.addTile(new Tile(id, x, y));
             }

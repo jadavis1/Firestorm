@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.redthirddivision.firestorm.Game;
-import com.redthirddivision.firestorm.rendering.textures.Sprite;
-import com.redthirddivision.firestorm.rendering.textures.SpriteSheet;
 import com.redthirddivision.firestorm.rendering.textures.Texture;
 
 /**
@@ -33,17 +31,17 @@ import com.redthirddivision.firestorm.rendering.textures.Texture;
  */
 public class Tile {
 
-    private static final SpriteSheet        terrain = new SpriteSheet(new Texture("terrain"), 32);
+    private static final Texture            terrain = new Texture("terrain");
     private static final Map<Integer, Tile> tileMap = new HashMap<Integer, Tile>();
     protected int                           x, y;
-    protected Sprite                        sprite;
+    protected Texture                       sprite;
     protected boolean                       solid;
     protected int                           id;
 
-    public static final Tile                tile1   = new Tile(0xFFFFFFFF, new Sprite(terrain, 1, 1));
-    public static final Tile                tile2   = new Tile(0xFFFF0000, new Sprite(terrain, 1, 2));
+    public static final Tile tile1 = new Tile(0xFFFFFFFF, new Texture(terrain, 1, 1, 32));
+    public static final Tile tile2 = new Tile(0xFFFF0000, new Texture(terrain, 1, 2, 32));
 
-    private Tile(int id, Sprite sprite) {
+    private Tile(int id, Texture sprite) {
         this.id = id;
         this.sprite = sprite;
         tileMap.put(id, this);

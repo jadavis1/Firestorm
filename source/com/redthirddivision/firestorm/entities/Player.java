@@ -18,7 +18,7 @@ package com.redthirddivision.firestorm.entities;
 import java.awt.event.KeyEvent;
 
 import com.redthirddivision.firestorm.input.KeyInput;
-import com.redthirddivision.firestorm.rendering.textures.Sprite;
+import com.redthirddivision.firestorm.rendering.textures.Texture;
 import com.redthirddivision.firestorm.states.GameState;
 
 /**
@@ -29,8 +29,8 @@ import com.redthirddivision.firestorm.states.GameState;
  */
 public class Player extends Mob {
 
-    public Player(Sprite sprite, double x, double y, GameState state) {
-        super(sprite, x, y, state);
+    public Player(Texture texture, double x, double y, GameState state) {
+        super(texture, x, y, state);
 
     }
 

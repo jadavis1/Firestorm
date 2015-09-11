@@ -14,7 +14,7 @@
 */
 package com.redthirddivision.firestorm.entities;
 
-import com.redthirddivision.firestorm.rendering.textures.Sprite;
+import com.redthirddivision.firestorm.rendering.textures.Texture;
 import com.redthirddivision.firestorm.states.GameState;
 import com.redthirddivision.firestorm.world.Tile;
 
@@ -32,8 +32,8 @@ public abstract class Mob extends Entity {
     protected boolean falling = true;
     protected boolean canJump;
 
-    public Mob(Sprite sprite, double x, double y, GameState state) {
-        super(sprite, x, y, state);
+    public Mob(Texture texture, double x, double y, GameState state) {
+        super(texture, x, y, state);
         gravity = 0.5;
         maxDY = 7;
     }
