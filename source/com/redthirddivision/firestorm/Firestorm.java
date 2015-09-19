@@ -19,6 +19,8 @@ import javax.swing.JFrame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.redthirddivision.firestorm.utils.Util;
+
 /**
  * <strong>Project:</strong> Firestorm <br>
  * <strong>File:</strong> Firestorm.java
@@ -28,7 +30,8 @@ import java.awt.event.WindowEvent;
 public class Firestorm {
     
     public static void main(String[] args) {
-        Game game = new Game();
+        System.out.println("Running on OS: " + Util.getOSName());
+        final Game game = new Game();
         JFrame frame = new JFrame(Game.TITLE);
         frame.add(game);
         frame.setSize(Game.WIDTH, Game.HEIGHT);

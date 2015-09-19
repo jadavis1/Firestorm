@@ -25,6 +25,7 @@ import com.redthirddivision.firestorm.input.MouseInput;
 import com.redthirddivision.firestorm.states.GameState;
 import com.redthirddivision.firestorm.states.MenuState;
 import com.redthirddivision.firestorm.states.StateManager;
+import com.redthirddivision.firestorm.utils.Util;
 
 /**
  * <strong>Project:</strong> Game <br>
@@ -39,11 +40,11 @@ public class Game extends Canvas implements Runnable {
     public static final int     HEIGHT = WIDTH / 4 * 3;
     public static final boolean DEBUG  = false;
 
-    private boolean             running;
+    private boolean running;
 
-    private StateManager        stateManager;
+    private StateManager stateManager;
 
-    public static Game          INSTANCE;
+    public static Game INSTANCE;
 
     public Game() {
         addKeyListener(new KeyInput());
@@ -71,7 +72,9 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
         Graphics2D g2d = (Graphics2D) g;
-        g2d.translate(-6, -28);
+        // At least on Ubuntu we seem not to need to translate the canvas
+        if(!Util.isUnix())
+            g2d.translate(-6, -28);
         ////////////////////////////////////////////////
 
         g2d.setColor(Color.BLACK);
@@ -82,7 +85,7 @@ public class Game extends Canvas implements Runnable {
         ////////////////////////////////////////////////
         g.dispose();
         bs.show();
-        //Code Snippet: std::cout << "Snippet yo";
+        //Code Snippet: std::cout << "Snippet yo"; -- uhm someone remind me why I put this here? I feel like there was a reason?
     }
 
     protected void start() {
