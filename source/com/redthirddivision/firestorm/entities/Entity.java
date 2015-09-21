@@ -46,16 +46,16 @@ public abstract class Entity {
 
     public void render(Graphics2D g) {
         texture.render(g, x, y);
-        if (Game.DEBUG) {
-            g.setColor(Color.RED);
-            g.draw(getTop());
-            g.setColor(Color.BLUE);
-            g.draw(getBottom());
-            g.setColor(Color.MAGENTA);
-            g.draw(getLeft());
-            g.setColor(Color.ORANGE);
-            g.draw(getRight());
-        }
+//        if (Game.DEBUG) {
+//            g.setColor(Color.RED);
+//            g.draw(getTop());
+//            g.setColor(Color.BLUE);
+//            g.draw(getBottom());
+//            g.setColor(Color.MAGENTA);
+//            g.draw(getLeft());
+//            g.setColor(Color.ORANGE);
+//            g.draw(getRight());
+//        }
     }
 
     public Rectangle getBounds() {

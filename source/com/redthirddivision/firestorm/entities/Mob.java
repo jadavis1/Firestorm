@@ -14,6 +14,9 @@
 */
 package com.redthirddivision.firestorm.entities;
 
+import java.awt.Graphics2D;
+
+import com.redthirddivision.firestorm.rendering.textures.Animation;
 import com.redthirddivision.firestorm.rendering.textures.Texture;
 import com.redthirddivision.firestorm.states.GameState;
 import com.redthirddivision.firestorm.world.Tile;
@@ -26,14 +29,18 @@ import com.redthirddivision.firestorm.world.Tile;
  */
 public abstract class Mob extends Entity {
 
-    protected double  dx, dy;
-    protected double  maxDY;
-    protected double  gravity;
-    protected boolean falling = true;
-    protected boolean canJump;
+    protected double    dx, dy;
+    protected double    maxDY;
+    protected double    gravity;
+    protected boolean   falling;
+    protected boolean   canJump;
+    protected boolean   moving;
+    protected Animation anime;
 
-    public Mob(Texture texture, double x, double y, GameState state) {
+    public Mob(Texture texture, double x, double y, GameState state, Animation anime) {
         super(texture, x, y, state);
+        this.anime = anime;
+        falling = true;
         gravity = 0.5;
         maxDY = 7;
     }
@@ -42,6 +49,16 @@ public abstract class Mob extends Entity {
     public void tick() {
         move();
         fall();
+        if(dx != 0) moving = true;
+        else moving = false;
+        if(moving) anime.run();
+    }
+    
+    @Override
+    public void render(Graphics2D g) {
+        if(!moving)
+            super.render(g);
+        else anime.render(g, x, y);
     }
 
     public void move() {
