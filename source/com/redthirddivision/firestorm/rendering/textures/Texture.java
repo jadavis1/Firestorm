@@ -83,4 +83,8 @@ public class Texture {
         return height;
     }
 
+    public BufferedImage getImage() {
+        return image;
+    }
+
 }

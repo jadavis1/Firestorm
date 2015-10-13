@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.redthirddivision.firestorm.rendering.ui.SplashScreenDriver;
 import com.redthirddivision.firestorm.utils.Util;
 
 /**
@@ -31,6 +32,7 @@ public class Firestorm {
     
     public static void main(String[] args) {
         System.out.println("Running on OS: " + Util.getOSName());
+        new SplashScreenDriver();
         final Game game = new Game();
         JFrame frame = new JFrame(Game.TITLE);
         frame.add(game);

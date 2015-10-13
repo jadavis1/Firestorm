@@ -85,7 +85,6 @@ public class Game extends Canvas implements Runnable {
         ////////////////////////////////////////////////
         g.dispose();
         bs.show();
-        //Code Snippet: std::cout << "Snippet yo"; -- uhm someone remind me why I put this here? I feel like there was a reason?
     }
 
     protected void start() {
