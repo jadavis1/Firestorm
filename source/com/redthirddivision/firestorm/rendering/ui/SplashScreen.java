@@ -79,7 +79,7 @@ public class SplashScreen extends JWindow {
             @Override
             public void run() {
                 progressBar.setValue(progress);
-                progressBar.setString("Loading: " + percentage + "%");
+                progressBar.setString("Loading: " + (int) percentage + "%");
             }
         });
     }

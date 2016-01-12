@@ -18,8 +18,7 @@ import java.awt.Graphics2D;
 
 import com.redthirddivision.firestorm.rendering.textures.Animation;
 import com.redthirddivision.firestorm.rendering.textures.Texture;
-import com.redthirddivision.firestorm.states.GameState;
-import com.redthirddivision.firestorm.world.Tile;
+import com.redthirddivision.firestorm.world.TileMap;
 
 /**
  * <strong>Project:</strong> Game <br>
@@ -37,74 +36,41 @@ public abstract class Mob extends Entity {
     protected boolean   moving;
     protected Animation anime;
 
-    public Mob(Texture texture, double x, double y, GameState state, Animation anime) {
-        super(texture, x, y, state);
+    public Mob(Texture texture, double x, double y, TileMap tileMap, Animation anime) {
+        super(texture, x, y, tileMap);
         this.anime = anime;
-        falling = true;
         gravity = 0.5;
         maxDY = 7;
     }
 
     @Override
     public void tick() {
+        if (dy > 0) falling = true;
+        else if (dy < 0) falling = false;
         move();
         fall();
-        if(dx != 0) moving = true;
+        if (dx != 0) moving = true;
         else moving = false;
-        if(moving) anime.run();
+        if (moving) anime.run();
     }
-    
+
     @Override
-    public void render(Graphics2D g) {
-        if(!moving)
-            super.render(g);
-        else anime.render(g, x, y);
+    public void render(Graphics2D g, int offsetX, int offsetY) {
+        if (!moving)
+            super.render(g, offsetX, offsetY);
+        else anime.render(g, x + offsetX, y + offsetY);
     }
 
     public void move() {
-        if (!hasHorizontalCollision()) x += dx;
-        if (!hasVerticalCollision()) y += dy;
-    }
-
-    protected boolean hasVerticalCollision() {
-        for (int i = 0; i < state.getTiles().size(); i++) {
-            Tile t = state.getTiles().get(i);
-            if (getBottom().intersects(t.getTop()) && dy > 0) {
-                canJump = true;
-                falling = false;
-                dy = 0;
-                return true;
-            } else falling = true;
-            if (getBounds().intersects(t.getBottom()) && dy < 0) {
-                dy = 0;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    protected boolean hasHorizontalCollision() {
-        for (int i = 0; i < state.getTiles().size(); i++) {
-            Tile t = state.getTiles().get(i);
-            if (getBounds().intersects(t.getRight()) && dx < 0) {
-                dx = 0;
-                return true;
-            }
-            if (getBounds().intersects(t.getLeft()) && dx > 0) {
-                dx = 0;
-                return true;
-            }
-        }
-
-        return false;
+        boolean horiz = tileMap.getTileCollision(texture.getWidth(), x, y, x + dx, y, false);
+        boolean vert = tileMap.getTileCollision(texture.getWidth(), x, y, x, y + dy, true);
+        if (!horiz) x += dx;
+        if (!vert) y += dy;
     }
 
     protected void fall() {
-        if (falling) {
-            dy += gravity;
-            if (dy > maxDY) dy = maxDY;
-        }
+        dy += gravity;
+        if (dy > maxDY) dy = maxDY;
     }
 
     protected void jump(double jumpHeight) {
@@ -112,6 +78,30 @@ public abstract class Mob extends Entity {
             dy -= jumpHeight;
             canJump = false;
         }
+    }
+
+    public void setCanJump(boolean canJump) {
+        this.canJump = canJump;
+    }
+
+    public void setVelocityY(double dy) {
+        this.dy = dy;
+    }
+
+    public boolean isFalling() {
+        return falling;
+    }
+
+    public boolean isMovingLeft() {
+        return dx < 0;
+    }
+
+    public boolean isMovingRight() {
+        return dx > 0;
+    }
+
+    public boolean isMoving() {
+        return moving;
     }
 
 }

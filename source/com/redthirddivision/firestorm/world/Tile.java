@@ -14,13 +14,10 @@
 */
 package com.redthirddivision.firestorm.world;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.redthirddivision.firestorm.Game;
 import com.redthirddivision.firestorm.rendering.textures.Texture;
 
 /**
@@ -31,67 +28,28 @@ import com.redthirddivision.firestorm.rendering.textures.Texture;
  */
 public class Tile {
 
-    private static final Texture            terrain = new Texture("terrain");
+    private static final Texture            terrain = new Texture("spritesheet_template");
     private static final Map<Integer, Tile> tileMap = new HashMap<Integer, Tile>();
-    protected int                           x, y;
     protected Texture                       sprite;
     protected boolean                       solid;
     protected int                           id;
 
-    public static final Tile tile1 = new Tile(0xFFFFFFFF, new Texture(terrain, 1, 1, 32));
-    public static final Tile tile2 = new Tile(0xFFFF0000, new Texture(terrain, 1, 2, 32));
+    public static final Tile tile1 = new Tile(0xFFFFFFFF, new Texture(terrain, 1, 1, 64));
+    public static final Tile tile2 = new Tile(0xFFFF0000, new Texture(terrain, 1, 2, 64));
 
     private Tile(int id, Texture sprite) {
         this.id = id;
         this.sprite = sprite;
+        solid = true;
         tileMap.put(id, this);
     }
 
-    public Tile(int id, int x, int y) {
-        this.sprite = getFromID(id).sprite;
-        this.x = x * sprite.getWidth();
-        this.y = y * sprite.getHeight();
-        this.solid = true;
-    }
-
-    public void render(Graphics2D g) {
+    public void render(Graphics2D g, int x, int y) {
         sprite.render(g, x, y);
-        if (Game.DEBUG) {
-            g.setColor(Color.RED);
-            g.draw(getTop());
-            g.setColor(Color.BLUE);
-            g.draw(getBottom());
-            g.setColor(Color.MAGENTA);
-            g.draw(getLeft());
-            g.setColor(Color.ORANGE);
-            g.draw(getRight());
-        }
     }
 
-    public Rectangle getBounds() {
-        return new Rectangle((int) x, (int) y, sprite.getWidth(),
-                sprite.getHeight());
-    }
-
-    public Rectangle getTop() {
-        return new Rectangle((int) x + 6, (int) y, sprite.getWidth() - 6,
-                4);
-    }
-
-    public Rectangle getBottom() {
-        return new Rectangle((int) x + 6, (int) y + sprite.getHeight() - 4,
-                sprite.getWidth() - 6,
-                4);
-    }
-
-    public Rectangle getRight() {
-        return new Rectangle((int) x + sprite.getWidth() - 4, (int) y + 6, 4,
-                sprite.getHeight() - 6);
-    }
-
-    public Rectangle getLeft() {
-        return new Rectangle((int) x, (int) y + 6, 4,
-                sprite.getHeight() - 6);
+    public boolean isSolid() {
+        return solid;
     }
 
     public static Tile getFromID(int id) {

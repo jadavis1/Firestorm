@@ -14,13 +14,10 @@
 */
 package com.redthirddivision.firestorm.entities;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 
-import com.redthirddivision.firestorm.Game;
 import com.redthirddivision.firestorm.rendering.textures.Texture;
-import com.redthirddivision.firestorm.states.GameState;
+import com.redthirddivision.firestorm.world.TileMap;
 
 /**
  * <strong>Project:</strong> Game <br>
@@ -30,58 +27,38 @@ import com.redthirddivision.firestorm.states.GameState;
  */
 public abstract class Entity {
 
-    protected double    x, y;
-    protected Texture    texture;
-    protected GameState state;
+    protected double  x, y;
+    protected Texture texture;
+    protected TileMap tileMap;
 
-    public Entity(Texture texture, double x, double y, GameState state) {
+    public Entity(Texture texture, double x, double y, TileMap tileMap) {
         this.texture = texture;
         this.x = x;
         this.y = y;
-        this.state = state;
-        state.addEntity(this);
+        this.tileMap = tileMap;
+        tileMap.addEntity(this);
     }
 
     public abstract void tick();
 
-    public void render(Graphics2D g) {
-        texture.render(g, x, y);
-//        if (Game.DEBUG) {
-//            g.setColor(Color.RED);
-//            g.draw(getTop());
-//            g.setColor(Color.BLUE);
-//            g.draw(getBottom());
-//            g.setColor(Color.MAGENTA);
-//            g.draw(getLeft());
-//            g.setColor(Color.ORANGE);
-//            g.draw(getRight());
-//        }
+    public void render(Graphics2D g, int offsetX, int offsetY) {
+        texture.render(g, x + offsetX, y + offsetY);
     }
 
-    public Rectangle getBounds() {
-        return new Rectangle((int) x, (int) y, texture.getWidth(),
-                texture.getHeight());
+    public void setX(double x) {
+        this.x = x;
     }
 
-    public Rectangle getTop() {
-        return new Rectangle((int) x + 6, (int) y, texture.getWidth() - 6,
-                4);
+    public void setY(double y) {
+        this.y = y;
     }
 
-    public Rectangle getBottom() {
-        return new Rectangle((int) x + 6, (int) y + texture.getHeight() - 4,
-                texture.getWidth() - 6,
-                4);
+    public double getX() {
+        return x;
     }
 
-    public Rectangle getRight() {
-        return new Rectangle((int) x + texture.getWidth() - 4, (int) y + 6, 4,
-                texture.getHeight() - 6);
-    }
-
-    public Rectangle getLeft() {
-        return new Rectangle((int) x, (int) y + 6, 4,
-                texture.getHeight() - 6);
+    public double getY() {
+        return y;
     }
 
 }

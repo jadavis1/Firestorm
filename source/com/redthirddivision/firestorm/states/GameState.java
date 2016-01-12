@@ -15,11 +15,9 @@
 package com.redthirddivision.firestorm.states;
 
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 
-import com.redthirddivision.firestorm.entities.Entity;
-import com.redthirddivision.firestorm.world.Tile;
-import com.redthirddivision.firestorm.world.World;
+import com.redthirddivision.firestorm.Game;
+import com.redthirddivision.firestorm.world.TileMap;
 
 /**
  * <strong>Project:</strong> Game <br>
@@ -29,16 +27,12 @@ import com.redthirddivision.firestorm.world.World;
  */
 public class GameState implements State {
 
-    private ArrayList<Entity> entities;
-    private ArrayList<Tile>   tiles;
-    private World world;
 
+    private TileMap tileMap;
+    
     @Override
     public void init() {
-        entities = new ArrayList<Entity>();
-        tiles = new ArrayList<Tile>();
-//        new Player(new Sprite("player"), 100, 100, this);
-        world = new World("level1", this);
+        tileMap = new TileMap("level1");
     }
 
     @Override
@@ -46,38 +40,21 @@ public class GameState implements State {
 
     @Override
     public void tick(StateManager stateManager) {
-        for (Entity e : entities)
-            e.tick();
+        tileMap.tick();
     }
 
     @Override
     public void render(Graphics2D g) {
-        for (Entity e : entities)
-            e.render(g);
-        for (Tile t : tiles)
-            t.render(g);
+        tileMap.render(g, Game.WIDTH, Game.HEIGHT);
     }
 
     @Override
     public void exit() {
-        entities.clear();
     }
 
     @Override
     public String getName() {
         return "level1";
-    }
-
-    public void addEntity(Entity entity) {
-        entities.add(entity);
-    }
-    
-    public void addTile(Tile tile){
-        tiles.add(tile);
-    }
-    
-    public ArrayList<Tile> getTiles() {
-        return tiles;
     }
 
 }

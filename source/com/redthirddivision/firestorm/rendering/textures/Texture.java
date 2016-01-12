@@ -16,7 +16,7 @@ package com.redthirddivision.firestorm.rendering.textures;
 
 import javax.imageio.ImageIO;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -71,8 +71,12 @@ public class Texture {
         this(spriteSheet, x, y, size, size);
     }
 
-    public void render(Graphics g, double x, double y) {
+    public void render(Graphics2D g, double x, double y) {
         g.drawImage(image, (int) x, (int) y, null);
+    }
+
+    public void render(Graphics2D g, int destX1, int destX2, int srcX1, int srcX2, int y) {
+        g.drawImage(image, destX1, y, destX2, y + height, srcX1, 0, srcX2, height, null);
     }
 
     public int getWidth() {

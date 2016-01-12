@@ -46,7 +46,7 @@ public class Animation {
     public void run() {
         // Animation is faster the lower speed is
         count++;
-        if(count < speed){
+        if(count > speed){
             count = 0;
             nextFrame();
         }
