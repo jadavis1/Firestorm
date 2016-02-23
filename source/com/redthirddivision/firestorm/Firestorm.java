@@ -20,6 +20,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import com.redthirddivision.firestorm.rendering.ui.SplashScreenDriver;
+import com.redthirddivision.firestorm.utils.Test1;
+import com.redthirddivision.firestorm.utils.Test2;
+import com.redthirddivision.firestorm.utils.ThreadPool;
 import com.redthirddivision.firestorm.utils.Util;
 
 /**
@@ -31,6 +34,13 @@ import com.redthirddivision.firestorm.utils.Util;
 public class Firestorm {
     
     public static void main(String[] args) {
+        ThreadPool pool = new ThreadPool(4);
+        pool.runTask(new Test1());
+        pool.runTask(new Test2());
+        pool.runTask(new Test1());
+        pool.runTask(new Test2());
+        pool.join();
+
         System.out.println("Running on OS: " + Util.getOSName());
         new SplashScreenDriver();
         final Game game = new Game();
