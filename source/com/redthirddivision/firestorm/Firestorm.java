@@ -19,9 +19,8 @@ import javax.swing.JFrame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.redthirddivision.firestorm.audio.MusicPlayer;
 import com.redthirddivision.firestorm.rendering.ui.SplashScreenDriver;
-import com.redthirddivision.firestorm.utils.Test1;
-import com.redthirddivision.firestorm.utils.Test2;
 import com.redthirddivision.firestorm.utils.ThreadPool;
 import com.redthirddivision.firestorm.utils.Util;
 
@@ -34,13 +33,7 @@ import com.redthirddivision.firestorm.utils.Util;
 public class Firestorm {
     
     public static void main(String[] args) {
-        ThreadPool pool = new ThreadPool(4);
-        pool.runTask(new Test1());
-        pool.runTask(new Test2());
-        pool.runTask(new Test1());
-        pool.runTask(new Test2());
-        pool.join();
-
+        ThreadPool pool = new ThreadPool(2);
         System.out.println("Running on OS: " + Util.getOSName());
         new SplashScreenDriver();
         final Game game = new Game();
@@ -59,7 +52,10 @@ public class Firestorm {
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        game.start();
+        MusicPlayer player = new MusicPlayer("Cold Steel");
+        pool.runTask(player);
+        pool.runTask(game);
+        pool.join();
     }
 
 }

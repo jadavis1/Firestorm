@@ -87,12 +87,6 @@ public class Game extends Canvas implements Runnable {
         bs.show();
     }
 
-    protected void start() {
-        if (running) return;
-        running = true;
-        new Thread(this, "FirestormMain-Thread").start();
-    }
-
     public void stop() {
         if (!running) return;
         running = false;
@@ -100,6 +94,7 @@ public class Game extends Canvas implements Runnable {
 
     @Override
     public void run() {
+        running = true;
         requestFocus();
         double target = 60.0;
         double nsPerTick = 1000000000.0 / target;
